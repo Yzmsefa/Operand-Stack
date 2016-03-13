@@ -11,7 +11,6 @@ public class FourActions
 		
 		for(int i=0; i<args.length; i++)
 			ifade +=args[i];
-		//System.out.println("Sonuc:"+hesaplamaislemi(ifade));
 		
 		try{
 			
@@ -23,8 +22,8 @@ public class FourActions
 }
 	public static int hesaplamaislemi(String ifade)
 	{
-		yigin<Integer> sayiyigin = new yigin<Integer>();
-		yigin<Character> operatoryigin = new yigin<Character>();
+		stack<Integer> sayiyigin = new stack<Integer>();
+		stack<Character> operatoryigin = new stack<Character>();
 		
 		StringTokenizer simge = new StringTokenizer(ifade,"()+/*",true);
 	
@@ -80,8 +79,8 @@ public class FourActions
 	
 	public static void islem
 	(
-		yigin<Integer>sayiyigin,
-		yigin<Character> operatoryigin
+		stack<Integer>sayiyigin,
+		stack<Character> operatoryigin
 	)
 	{
 		char operator = operatoryigin.cikar();
@@ -106,5 +105,7 @@ public class FourActions
 		}
 	}	
 }
+
+
 
 
