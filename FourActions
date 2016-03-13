@@ -1,0 +1,110 @@
+import java.util.*;
+
+public class FourActions
+{
+	public static void main(String[] args) {
+		Scanner hesapla = new Scanner(System.in);
+		System.out.println("Lütfen hesaplanacak ifadeyi giriniz");
+		String ifade = hesapla.nextLine();
+		
+		System.out.println(ifade);
+		
+		for(int i=0; i<args.length; i++)
+			ifade +=args[i];
+		//System.out.println("Sonuc:"+hesaplamaislemi(ifade));
+		
+		try{
+			
+			System.out.println("Sonuc:"+hesaplamaislemi(ifade));
+			
+		}catch(Exception ex){
+		System.out.println("Lütfen doğru bir ifade giriniz");
+	}
+}
+	public static int hesaplamaislemi(String ifade)
+	{
+		yigin<Integer> sayiyigin = new yigin<Integer>();
+		yigin<Character> operatoryigin = new yigin<Character>();
+		
+		StringTokenizer simge = new StringTokenizer(ifade,"()+/*",true);
+	
+	while(simge.hasMoreTokens())
+	{
+		String deger = simge.nextToken().trim();
+		if(deger.length()==0)
+			continue;
+		else if(deger.charAt(0) =='+' || deger.charAt(0) == '-')
+		{
+			while(!operatoryigin.bosmu() &&
+					(operatoryigin.kontrol() == '+'||
+					 operatoryigin.kontrol() == '-' ||
+					 operatoryigin.kontrol() == '*' ||
+					 operatoryigin.kontrol() =='/'))
+			{
+				islem(sayiyigin,operatoryigin);
+			}
+			operatoryigin.ekle(deger.charAt(0));
+		}
+			   else if (deger.charAt(0) == '*' || deger.charAt(0) == '/') {
+			        
+			        while (!operatoryigin.bosmu() &&
+			          (operatoryigin.kontrol() == '*' ||
+			        		  operatoryigin.kontrol() == '/')) {
+			          islem(sayiyigin, operatoryigin);
+			        }
+			        operatoryigin.ekle(deger.charAt(0));
+			   }
+			else if (deger.trim().charAt(0)=='(')
+			{
+				operatoryigin.ekle('(');
+			}
+			else if (deger.trim().charAt(0)==')')
+			{
+				while(operatoryigin.kontrol()!='(')
+				{
+					islem(sayiyigin,operatoryigin);
+				}
+				operatoryigin.cikar();
+			}
+			else
+				sayiyigin.ekle(new Integer(deger));
+		}
+	
+	
+	while(!operatoryigin.bosmu())
+	{
+		islem(sayiyigin,operatoryigin);
+	}
+	return sayiyigin.cikar();
+	}
+	
+	public static void islem
+	(
+		yigin<Integer>sayiyigin,
+		yigin<Character> operatoryigin
+	)
+	{
+		char operator = operatoryigin.cikar();
+		int say1 = sayiyigin.cikar();
+		int say2 = sayiyigin.cikar();
+		
+		if(operator =='+')
+		{
+			sayiyigin.ekle(say2+say1);
+		}
+		else if(operator =='-')
+		{
+			sayiyigin.ekle(say2-say1);
+		}
+		else if(operator =='*')
+		{
+			sayiyigin.ekle(say2*say1);
+		}
+		else if(operator =='/')
+		{
+			sayiyigin.ekle(say2/say1);
+		}
+	}	
+}
+
+
