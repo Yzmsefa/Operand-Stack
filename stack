@@ -1,0 +1,26 @@
+import java.util.*;
+public class stack<E> {
+	private ArrayList<E> liste = new ArrayList<E>();
+
+public int getSize()
+{
+return liste.size();	
+}
+public E kontrol(){
+	return liste.get(getSize()-1);	
+}
+public void ekle(E o)
+{
+liste.add(o);	
+}
+public E cikar()
+{
+E o = liste.get(getSize()-1);
+liste.remove(getSize()-1);
+return o;
+}
+public boolean bosmu()
+{
+return liste.isEmpty();	
+}
+}
